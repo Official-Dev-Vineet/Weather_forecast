@@ -1,0 +1,16 @@
+nav {
+  position: relative;
+}
+nav .logo {
+  width: clamp(50px, 7vw, 100px);
+}
+nav ul li {
+  list-style: none;
+}
+nav ul li a {
+  font-size: clamp(1rem, 1vw, 1.5rem);
+  font-weight: 400;
+  text-decoration: none;
+  letter-spacing: 1px;
+  font-family: 'Patua One', cursive;
+}

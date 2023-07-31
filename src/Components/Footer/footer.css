@@ -1,0 +1,4 @@
+footer {
+  min-height: 20rem;
+  background-color: var(--color-primary-variant);
+}
