@@ -1,9 +1,11 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { Header } from "../Utils/Header/Header";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { ThemeContext } from "../Components/ThemeContext";
-
+import { FaUserShield } from "react-icons/fa";
 export const Login = () => {
+  const { username } = useParams();
+  console.log(username);
   const { user, setUser } = useContext(ThemeContext);
   const navigate = useNavigate();
   const [error, setError] = useState(null);
@@ -27,19 +29,19 @@ export const Login = () => {
   };
   function checkForm(emailValue, passwordValue) {
     const user = localStorage.getItem("user");
-    console.log(user);
-    emailValue === JSON.parse(user).email &&
-    passwordValue === JSON.parse(user).password
+    emailValue === JSON.parse(user)?.email &&
+    passwordValue === JSON.parse(user)?.password
       ? validate(true)
       : setError("Invalid Credentials");
   }
 
   useEffect(() => {
-    user !== null && user !== undefined && navigate("/user");
+    user !== null && user !== undefined ? navigate("/user") : null;
   });
   return (
     <section>
       <Header
+        icon={<FaUserShield />}
         title="Login"
         subtitle="Secure Login Using Your localStorage Data."
       />
@@ -59,9 +61,12 @@ export const Login = () => {
           />
         </form>
         {error && <p>{error}</p>}
-        <p>
-          Don&#39;t have an account? <Link to="/signUp">Sign Up</Link>
-        </p>
+        {user === null && user === undefined && (
+          <p>
+            Don&#34;t have an account?
+            <Link to="/user">SignUp</Link>
+          </p>
+        )}
       </div>
     </section>
   );

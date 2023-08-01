@@ -15,8 +15,10 @@ import { useEffect, useState } from "react";
 import { User } from "./Auth/User";
 import { Login } from "./Auth/Login";
 export const App = () => {
-  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
-  const [user, setUser] = useState(null);
+  const [theme, setTheme] = useState(localStorage?.getItem("theme") || "light");
+  const [user, setUser] = useState(
+    JSON.parse(localStorage?.getItem("user"))?.username || null
+  );
   useEffect(() => {
     theme === "light"
       ? document.body.classList.remove("dark")
@@ -41,7 +43,9 @@ export const App = () => {
           }
         />
         <Route path="/about" element={<About />} />
-        <Route path="/user" element={<User />} />
+        <Route path="/user" element={<User />}>
+          <Route path="/user/login/:username" element={<Login />} />
+        </Route>
         <Route path="/login" element={<Login />} />
         <Route path="*" element={<PageNotFound />} />
       </Route>

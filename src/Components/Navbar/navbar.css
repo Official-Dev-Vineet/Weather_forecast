@@ -1,5 +1,6 @@
 nav {
   position: relative;
+  border-bottom: 2px solid var(--color-primary);
 }
 nav .logo {
   width: clamp(50px, 7vw, 100px);
@@ -8,7 +9,7 @@ nav ul li {
   list-style: none;
 }
 nav ul li a {
-  font-size: clamp(1rem, 1vw, 1.5rem);
+  font-size: clamp(1rem, 1.3vw, 1.5rem);
   font-weight: 400;
   text-decoration: none;
   letter-spacing: 1px;

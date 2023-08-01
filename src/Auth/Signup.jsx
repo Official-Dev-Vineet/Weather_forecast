@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Header } from "../Utils/Header/Header";
 import { useNavigate } from "react-router-dom";
+import { AiOutlineUserAdd } from "react-icons/ai";
 export const SignUp = () => {
   const navigate = useNavigate();
   const [error, setError] = useState(null);
@@ -10,35 +11,43 @@ export const SignUp = () => {
   const password = useRef();
   function formHandling(e) {
     e.preventDefault();
-    const nameValue = name.current.value;
-    const usernameValue = username.current.value;
-    const emailValue = email.current.value;
-    const passwordValue = password.current.value;
-    nameValue && usernameValue && emailValue && passwordValue
-      ? setError(null)
-      : setError("Please Fill All Fields");
-    const userObject = {
-      name: nameValue,
-      username: usernameValue,
-      email: emailValue,
-      password: passwordValue,
-    };
-    localStorage.setItem("user", JSON.stringify(userObject));
+    const nameValue = name.current.value.trim();
+    const usernameValue = username.current.value.trim();
+    const emailValue = email.current.value.trim();
+    const passwordValue = password.current.value.trim();
     name.current.value = "";
     username.current.value = "";
     email.current.value = "";
     password.current.value = "";
-    navigate("/login", { replace: true });
+    nameValue.length > 3 &&
+    usernameValue.length > 4 &&
+    emailValue.length > 8 &&
+    passwordValue.length > 6
+      ? setError(null)
+      : setError("Please Fill All Fields correctly");
+    error !== null
+      ? () => {
+          const userObject = {
+            name: nameValue,
+            username: usernameValue,
+            email: emailValue,
+            password: passwordValue,
+          };
+          localStorage?.setItem("user", JSON.stringify(userObject));
+          navigate(`/user/login/${usernameValue}`, { replace: true });
+        }
+      : null;
   }
   useEffect(() => {
-    const user = localStorage.getItem("user");
-    if (user !== null) {
-      navigate("/login");
+    const user = localStorage?.getItem("user");
+    if (user !== null && user !== undefined && user !== "") {
+      navigate("/user");
     }
   });
   return (
     <section>
       <Header
+        icon={<AiOutlineUserAdd />}
         title="Sign Up"
         subtitle="Please SignUp for an account and access this website"
       />

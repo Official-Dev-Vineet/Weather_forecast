@@ -2,14 +2,26 @@ import { useContext } from "react";
 import { Header } from "../Utils/Header/Header";
 import { ThemeContext } from "../Components/ThemeContext";
 import { SignUp } from "./Signup";
-
+import { FaUserGear } from "react-icons/fa6";
 export const User = () => {
   const { user, setUser } = useContext(ThemeContext);
+  function deleteUser() {
+    localStorage.removeItem("user");
+    setUser(null);
+  }
   return (
-    <section>
-      <Header title="User Authentication" subtitle="Check validation" />
-      {user ? <h1>{user}</h1> : <SignUp />}
-      <button onClick={() => setUser(null)}>logout</button>
+    <section className="mx-auto">
+      <Header
+        icon={<FaUserGear />}
+        title="User Authentication"
+        subtitle="User validated by localStorage"
+      />
+      {user ? <h1 className="tac">{user}</h1> : <SignUp />}
+      {user && (
+        <button className="block mx-auto mt" onClick={() => deleteUser()}>
+          Delete User
+        </button>
+      )}
     </section>
   );
 };
