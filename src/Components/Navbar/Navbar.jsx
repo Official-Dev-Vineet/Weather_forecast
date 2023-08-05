@@ -1,7 +1,7 @@
 import "./navbar.css";
 import { link } from "../../constant";
 import { Link, NavLink } from "react-router-dom";
-import logo from "../../assets/images/logo.png";
+import logo from "../../assets/images/logo-sm.png";
 import { useContext } from "react";
 import { ThemeContext } from "../ThemeContext";
 import { BsFillMoonStarsFill, BsFillSunFill } from "react-icons/bs";

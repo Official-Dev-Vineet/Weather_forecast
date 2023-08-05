@@ -13,8 +13,9 @@
   --color-bg: #1f1f38;
   --color-bg-variant: #2c2c6c;
   --color-primary: #4db5ff;
-  --color-primary-variant: rgb(66, 254, 254);
-  --color-light: #c1f2ff;
+  --color-primary-variant: #71aad3;
+  --accent-color: #c1f2ff;
+  --color-light: #f3f3f3;
   --color-dark: #1b1b1b;
   --color-black: #000000;
   --color-white: #ffffff;
@@ -34,13 +35,14 @@ body {
   color: var(--color-bg);
   transition: background-color 500ms ease, color 500ms ease;
 }
-#root{
+#root {
   max-width: 1600px;
   margin: 0 auto;
 }
 body.dark {
   background-color: var(--color-dark);
   color: var(--color-white);
+  --accent-color: var(--color-bg);
 }
 /* re-usable classes  */
 
@@ -68,8 +70,9 @@ body.dark {
 .justify-evenly {
   justify-content: space-evenly;
 }
-.mw-100 {
-  max-width: 32rem;
+.mw {
+  --max-w: 30;
+  max-width: calc(var(--max-w) * 1rem);
 }
 /* flex grow and shrink classes */
 
@@ -153,7 +156,12 @@ img {
   padding: 2rem 0;
 }
 .pad-even {
-  padding: 2rem;
+  --value: 1;
+  padding: calc(var(--value) * 1rem);
+}
+.margin-even {
+  --value: 1;
+  margin: calc(var(--value) * 1rem);
 }
 .mt {
   --value: 1;
@@ -162,6 +170,10 @@ img {
 .ml {
   --value: 1;
   margin-left: calc(var(--value) * 1rem);
+}
+.mb {
+  --value: 1;
+  margin-bottom: calc(var(--value) * 1rem);
 }
 .mx-auto {
   margin-inline: auto;
@@ -175,15 +187,16 @@ img {
 }
 .theme-text {
   color: var(--color-primary);
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
 }
 p {
   font-size: clamp(1rem, 1.5vw, 1.6rem);
 }
-.tac{
+.tac {
   text-align: center;
 }
 button {
-  --value:1;
+  --value: 1;
   font-size: clamp(1rem, 1.5vw, 1.6rem);
   text-transform: capitalize;
   outline: none;
@@ -199,9 +212,24 @@ button {
     color: var(--color-black);
   }
 }
-@media screen and (prefers-color-scheme: dark) {
-  body {
-    background-color: var(--color-dark);
-    color: var(--color-white);
-  }
+.error-text {
+  color: red;
+}
+input {
+  padding: 1rem;
+  border-radius: 3rem;
+  border: none;
+  outline: none;
+  background-color: inherit;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.4), -1.5px -1.5px 5px #fff;
+}
+.form {
+  padding: 2rem;
+  background-color: var(--accent-color);
+  border-radius: 1rem;
+}
+h2,
+h3,
+h4 {
+  font-family: "Patua One", cursive;
 }

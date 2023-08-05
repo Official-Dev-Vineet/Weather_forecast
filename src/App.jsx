@@ -43,10 +43,8 @@ export const App = () => {
           }
         />
         <Route path="/about" element={<About />} />
-        <Route path="/user" element={<User />}>
-          <Route path="/user/login/:username" element={<Login />} />
-        </Route>
-        <Route path="/login" element={<Login />} />
+        <Route path="/user" element={<User />} />
+        <Route path="/login/:username" element={<Login />} />
         <Route path="*" element={<PageNotFound />} />
       </Route>
     )

@@ -1,11 +1,9 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { Header } from "../Utils/Header/Header";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ThemeContext } from "../Components/ThemeContext";
 import { FaUserShield } from "react-icons/fa";
 export const Login = () => {
-  const { username } = useParams();
-  console.log(username);
   const { user, setUser } = useContext(ThemeContext);
   const navigate = useNavigate();
   const [error, setError] = useState(null);
@@ -45,7 +43,8 @@ export const Login = () => {
         title="Login"
         subtitle="Secure Login Using Your localStorage Data."
       />
-      <div className="form login">
+      <div className="form mb mw mx-auto">
+        <h2 className="tac mb mt">Sign In</h2>
         <form method="post" className="flex flex-col mw-100 mx-auto gap-sm">
           <input type="email" name="email" ref={email} placeholder="Email" />
           <input

@@ -15,16 +15,14 @@ export const SignUp = () => {
     const usernameValue = username.current.value.trim();
     const emailValue = email.current.value.trim();
     const passwordValue = password.current.value.trim();
-    name.current.value = "";
-    username.current.value = "";
-    email.current.value = "";
-    password.current.value = "";
     nameValue.length > 3 &&
     usernameValue.length > 4 &&
     emailValue.length > 8 &&
     passwordValue.length > 6
       ? setError(null)
-      : setError("Please Fill All Fields correctly");
+      : setError(
+          "Please Fill All Fields correctly <br/> <ul class='ml mt error-text'> <li> Name must be more than 3 characters</li> <li> Username must be more than 4 characters</li> <li> Email must be more than 8 characters</li> <li> Password must be more than 6 characters</li> </ul>"
+        );
     error !== null
       ? () => {
           const userObject = {
@@ -33,7 +31,11 @@ export const SignUp = () => {
             email: emailValue,
             password: passwordValue,
           };
-          localStorage?.setItem("user", JSON.stringify(userObject));
+          name.current.value = "";
+          username.current.value = "";
+          email.current.value = "";
+          password.current.value = "";
+          localStorage.setItem("user", JSON.stringify(userObject));
           navigate(`/user/login/${usernameValue}`, { replace: true });
         }
       : null;
@@ -47,12 +49,14 @@ export const SignUp = () => {
   return (
     <section>
       <Header
+        className="ml"
         icon={<AiOutlineUserAdd />}
         title="Sign Up"
         subtitle="Please SignUp for an account and access this website"
       />
-      <div className="form signUpForm">
-        <form method="post" className="flex flex-col mw-100 mx-auto gap-sm">
+      <div className="form margin-even">
+        <h2 className="mb mt tac">Note: All the fields are required!</h2>
+        <form method="post" className="flex flex-col gap-sm">
           <input type="text" name="name" ref={name} placeholder="Name" />
           <input
             type="text"
@@ -67,13 +71,18 @@ export const SignUp = () => {
             ref={password}
             placeholder="Password"
           />
-          <input
+          <input style={{cursor:"pointer"}}
             type="submit"
             onClick={(e) => formHandling(e)}
             value="Sign Up"
           />
         </form>
-        {error && <p className="mw-100  mx-auto">{error}</p>}
+        {error && (
+          <p
+            className="mw-100  mx-auto"
+            dangerouslySetInnerHTML={{ __html: error }}
+          />
+        )}
       </div>
     </section>
   );

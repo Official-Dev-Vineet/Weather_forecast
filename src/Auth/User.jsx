@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { Header } from "../Utils/Header/Header";
 import { ThemeContext } from "../Components/ThemeContext";
 import { SignUp } from "./Signup";
@@ -9,6 +9,9 @@ export const User = () => {
     localStorage.removeItem("user");
     setUser(null);
   }
+  useEffect(() => {
+    user ? console.log(`%c logged in as ${user}`, `color:var(--primary)`) : null;
+  },[user])
   return (
     <section className="mx-auto">
       <Header
