@@ -35,6 +35,8 @@ export const Login = () => {
 
   useEffect(() => {
     user !== null && user !== undefined ? navigate("/user") : null;
+    const userExist = localStorage.getItem("user");
+    userExist !== null && userExist !== undefined ? null : navigate("/user");
   });
   return (
     <section>
@@ -43,7 +45,7 @@ export const Login = () => {
         title="Login"
         subtitle="Secure Login Using Your localStorage Data."
       />
-      <div className="form mb mw mx-auto">
+      <div className="form mb mw  mx-auto">
         <h2 className="tac mb mt">Sign In</h2>
         <form method="post" className="flex flex-col mw-100 mx-auto gap-sm">
           <input type="email" name="email" ref={email} placeholder="Email" />

@@ -26,7 +26,7 @@ export const Home = () => {
               />
             </div>
           </div>
-          <div className="image-view grid-span-6">
+          <div className="image-view grid-span-6 mx-auto pad-even" style={{'--value':3}}>
             <img src={imgSrc} alt="promo figure" />
           </div>
         </section>

@@ -12,15 +12,20 @@ export const TextCard = ({ icon, title, subtitle, link }) => {
           {icon}
         </span>
         <br />
-        <span className="ml" style={{ fontFamily: "inherit", "--value": 1.5 }}>
+        <span
+          className="ml"
+          style={{ fontFamily: "inherit", fontSize: "inherit", "--value": 1.5 }}
+        >
           {title}
         </span>
       </h1>
-      <p className="ml mt mw" style={{ "--value": 1.4 }}>
+      <p className="ml mt mw" style={{ "--value": 1.4, "--max-w": 45 }}>
         {subtitle}
       </p>
       <br />
-      <Link to={link}>View More</Link>
+      <button className="ml">
+        <Link to={link}>View More</Link>
+      </button>
     </div>
   );
 };

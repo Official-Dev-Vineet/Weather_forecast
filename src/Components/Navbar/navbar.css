@@ -1,6 +1,7 @@
 nav {
   position: relative;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.4), -1.5px -1.5px 5px #fff;
+  background-color: var(--accent-color);
 }
 nav .logo {
   width: clamp(50px, 7vw, 100px);
