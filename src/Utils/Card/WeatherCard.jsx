@@ -1,21 +1,27 @@
 import PropTypes from "prop-types";
 import "./card.css";
+import { BsWind } from "react-icons/bs";
+import { BsSpeedometer } from "react-icons/bs";
+import { WiHumidity } from "react-icons/wi";
+import { FaWind } from "react-icons/fa";
+import { AiOutlineCompass } from "react-icons/ai";
+
 export const WeatherCard = ({ icon, title, subtitle, data }) => {
   return (
     <div className="weather-card mw mb mx-auto" style={{ "--max-w": 80 }}>
       <h2 className="tac mt mb inline-block" style={{ width: "100%" }}>
-        Weather Data
+        Weather Report
       </h2>
       <p>
-        You search for :{" "}
+        You search for weather data for :
         <strong style={{ fontFamily: "Patua One", textTransform: "uppercase" }}>
           {title}
         </strong>
       </p>
-      <div className="head mt">
+      <div className="head mt flex justify-between">
         <div className="title">
           <p>
-            Status : <strong>{subtitle}</strong>
+            Status :<strong>{subtitle}</strong>
           </p>
         </div>
         <div className="icon">
@@ -23,68 +29,101 @@ export const WeatherCard = ({ icon, title, subtitle, data }) => {
         </div>
       </div>
       <div className="data-area">
-        <div className="temperature-area">
-          <div className="temp grid grid-column-12 pad-even tac align-center justify-center gap-sm">
-            <p className="grid-span-3">
-              Temperature <br />
-              <strong>{data.temp_c}&deg;C</strong>
-            </p>
-            <p className="grid-span-3">
-              Temperature
-              <br />
-              <strong>{data.temp_f}&deg;F</strong>
-            </p>
-            <p className="grid-span-3">
-              Temp. (Feel like)
-              <br />
-              <strong>{data.feelslike_c}&deg;C</strong>
-            </p>
-            <p className="grid-span-3">
-              Temp. (Feel like) <br />
-              <strong>{data.feelslike_f}&deg;F</strong>
-            </p>
-          </div>
+        <div className="temp flex pad-even flex-wrap justify-center gap-md">
+          <p className="grid-span-3">
+            Temperature <br />
+            <strong>{data.temp_c}&deg;C</strong>
+          </p>
+          <p className="grid-span-3">
+            Temperature
+            <br />
+            <strong>{data.temp_f}&deg;F</strong>
+          </p>
+          <p className="grid-span-3">
+            Temp. (Feel like)
+            <br />
+            <strong>{data.feelslike_c}&deg;C</strong>
+          </p>
+          <p className="grid-span-3">
+            Temp. (Feel like) <br />
+            <strong>{data.feelslike_f}&deg;F</strong>
+          </p>
         </div>
         <p>Other Data</p>
-        <div className="group-data flex flex-wrap mt tac ">
-          <div className="humidity-area">
-            <div className="humidity">
-              <p>Humidity :{data.humidity}</p>
-            </div>
-          </div>
-          <div className="wind-area">
-            <div className="wind">
-              <p>
-                Wind Speed in <span title="Miles per hour">Mph</span> :
-                {data.wind_mph}
-              </p>
-              <p>
-                Wind Speed in <span title="Kilometers per hour">Kph</span> :
-                {data.wind_kph}
-              </p>
-              <p>Wind Direction :{data.wind_dir}</p>
-              <p>
-                wind gust in <span title="Miles per hour">Mph</span> :
-                {data.gust_mph}
-              </p>
-              <p>
-                wind gust in <span title="Kilometers per hour">Kph</span> :
-                {data.gust_kph}
-              </p>
-            </div>
-          </div>
-          <div className="pressure-area">
-            <div className="pressure">
-              <p>
-                Pressure in <span title="Millibars">Mb</span>:{data.pressure_mb}
-              </p>
-              <p>
-                {" "}
-                Pressure in <span title="inches of mercury">inHg</span> :{" "}
-                {data.pressure_in}{" "}
-              </p>
-            </div>
-          </div>
+        <div className="group-data flex flex-wrap justify-center gap-md mt tac">
+          <p>
+            <span className="icon">
+              <WiHumidity />
+            </span>
+            Humidity
+            <strong> {data.humidity}&#37;</strong>
+          </p>
+          <p>
+            <span className="icon">
+              <BsWind />
+            </span>
+            Wind Speed <br />
+            <strong>
+              {data.wind_mph}
+              <span title="Miles per hour">Mph</span>
+            </strong>
+          </p>
+          <p>
+            <span className="icon">
+              <BsWind />
+            </span>
+            Wind Speed <br />
+            <strong>
+              {data.wind_kph}
+              <span title="Kilometers per hour">Kph</span>
+            </strong>
+          </p>
+          <p>
+            <span className="icon">
+              <AiOutlineCompass />
+            </span>
+            Wind Direction <br />
+            <strong>{data.wind_dir}</strong>
+          </p>
+          <p title="A sudden burst in wind speed is called the wind gusts and typically lasts under 20 seconds">
+            <span className="icon">
+              <FaWind />
+            </span>
+            wind gust <br />
+            <strong>
+              {data.gust_mph}
+              <span title="Miles per hour">Mph</span>
+            </strong>
+          </p>
+          <p title="A sudden burst in wind speed is called the wind gusts and typically lasts under 20 seconds">
+            <span className="icon">
+              <FaWind />
+            </span>
+            wind gust <br />
+            <strong>
+              {data.gust_kph} <span title="Kilometers per hour">Kph</span>
+            </strong>
+          </p>
+          <p>
+            <span className="icon">
+              <BsSpeedometer />
+            </span>
+            Pressure
+            <br />
+            <strong>
+              {data.pressure_mb}
+              <span title="Millibars">Mb</span>
+            </strong>
+          </p>
+          <p>
+            <span className="icon">
+              <BsSpeedometer />
+            </span>
+            Pressure <br />
+            <strong>
+              {data.pressure_in} <span title="inches of mercury">inHg</span>
+            </strong>
+          </p>
         </div>
       </div>
     </div>

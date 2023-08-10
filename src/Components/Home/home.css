@@ -1,0 +1,17 @@
+@media screen and (max-width: 765px) {
+  section .text-view,
+  section .image-view {
+    grid-column: 1/-1;
+    text-align: center;
+    margin:2rem auto;
+  }
+  section .text-view h1{
+    justify-content: center;
+  }
+  section .image-view{
+    width: 90%;
+  }
+  .main-horizontal-pad {
+    padding: 0 2rem;
+  }
+}

@@ -1,8 +1,10 @@
+import "./home.css"
 import { Header } from "../../Utils/Header/Header";
 import { TiWeatherPartlySunny } from "react-icons/ti";
 import imgSrc from "../../assets/images/promo-figure-alt.svg";
 import { TextCard } from "../../Utils/Card/TextCard";
 import { FaShapes } from "react-icons/fa";
+
 export const Home = () => {
   return (
     <section>

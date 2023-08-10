@@ -36,7 +36,7 @@ export const Forecast = () => {
   useEffect(() => {
     locate.current.value = city;
     findWeather(city);
-  }, []);
+  }, [city]);
   return (
     <section>
       <Header

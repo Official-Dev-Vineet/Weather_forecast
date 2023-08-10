@@ -267,3 +267,12 @@ h2 {
     transform: rotate(360deg);
   }
 }
+.shake {
+  animation: shake 0.82s  3 linear;
+  font-size: 1.5rem;
+}
+@keyframes shake {
+  100%{
+    opacity: 0.1;
+  }
+}

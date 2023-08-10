@@ -24,7 +24,7 @@ export const TextCard = ({ icon, title, subtitle, link }) => {
       </p>
       <br />
       <button className="ml">
-        <Link to={link} style={{fontFamily:"Patua One"}} >View More</Link>
+        <Link to={link} style={{fontFamily:"Patua One"}} >Get ForeCast</Link>
       </button>
     </div>
   );
