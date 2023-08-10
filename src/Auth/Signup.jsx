@@ -1,10 +1,12 @@
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { Header } from "../Utils/Header/Header";
 import { useNavigate } from "react-router-dom";
 import { AiOutlineUserAdd } from "react-icons/ai";
+import { ThemeContext } from "../Components/ThemeContext";
 export const SignUp = () => {
   const navigate = useNavigate();
   const [error, setError] = useState(null);
+  const { setUser } = useContext(ThemeContext);
   const name = useRef();
   const username = useRef();
   const email = useRef();
@@ -24,8 +26,8 @@ export const SignUp = () => {
           "Please Fill All Fields correctly <br/> <ul class='ml mt error-text'> <li> Name must be more than 3 characters</li> <li> Username must be more than 4 characters</li> <li> Email must be more than 8 characters</li> <li> Password must be more than 6 characters</li> </ul>"
         );
     error !== null
-      ? signUpUser(nameValue, usernameValue, emailValue, passwordValue)
-      : null;
+      ? null
+      : signUpUser(nameValue, usernameValue, emailValue, passwordValue);
   }
   const signUpUser = (nameValue, usernameValue, emailValue, passwordValue) => {
     const userObject = {
@@ -39,7 +41,8 @@ export const SignUp = () => {
     email.current.value = "";
     password.current.value = "";
     localStorage.setItem("user", JSON.stringify(userObject));
-    navigate(`/user`, { replace: true });
+    setUser(JSON.parse(localStorage.getItem("user")).username);
+    navigate(`/`, { replace: true });
   };
   return (
     <section>
@@ -49,7 +52,7 @@ export const SignUp = () => {
         title="Sign Up"
         subtitle="Please SignUp for an account and access this website"
       />
-      <div className="form" style={{'--max-w':40}}>
+      <div className="form" style={{ "--max-w": 40 }}>
         <h2 className="mb mt tac">Note: All the fields are required!</h2>
         <form method="post" className="flex mw mx-auto flex-col gap-sm">
           <input type="text" name="name" ref={name} placeholder="Name" />
@@ -67,7 +70,7 @@ export const SignUp = () => {
             placeholder="Password"
           />
           <input
-            style={{ cursor: "pointer" }}
+            style={{ cursor: "pointer", fontFamily: "Patua One" }}
             type="submit"
             onClick={(e) => formHandling(e)}
             value="Sign Up"
@@ -75,7 +78,7 @@ export const SignUp = () => {
         </form>
         {error && (
           <p
-            className="mw mt mx-auto" 
+            className="mw mt mx-auto"
             dangerouslySetInnerHTML={{ __html: error }}
           />
         )}

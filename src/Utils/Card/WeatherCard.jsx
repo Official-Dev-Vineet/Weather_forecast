@@ -1,6 +1,5 @@
 import PropTypes from "prop-types";
 import "./card.css";
-import { url } from "../../constant";
 export const WeatherCard = ({ icon, title, subtitle, data }) => {
   return (
     <div className="weather-card mw mb mx-auto" style={{ "--max-w": 80 }}>
