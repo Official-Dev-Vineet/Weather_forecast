@@ -1,5 +1,77 @@
+import { useEffect, useRef, useState } from "react";
+import { Header } from "../../Utils/Header/Header";
+import { WeatherCard } from "../../Utils/Card/WeatherCard";
+
 export const Forecast = () => {
+  const locate = useRef("");
+  const [weather, setWeather] = useState(null);
+  const [city, setCity] = useState(localStorage.getItem("city") || null);
+  const [loader, setLoader] = useState(false);
+  const [error, setError] = useState(null);
+  const findWeather = async (city) => {
+    setError(null);
+    setWeather(null);
+    locate.current.value.length > 0
+      ? fetchWeather(city)
+      : setError("Please Enter City");
+    setCity(city);
+    localStorage.setItem("city", city);
+  };
+  const fetchWeather = async (city) => {
+    setLoader(true);
+    await fetch(
+      `${import.meta.env.VITE_URL}current.json?key=${
+        import.meta.env.VITE_KEY
+      }&q=${city}`
+    )
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        const { current, location } = data;
+        setWeather({ current, location });
+      });
+    setLoader(false);
+  };
+  useEffect(() => {
+    locate.current.value = city;
+    findWeather(city);
+  }, []);
   return (
-    <div>Forecast</div>
-  )
-}
+    <section>
+      <Header
+        title="Weather Forecast"
+        subtitle="Free Weather Forecast for commercial and non-commercial use."
+      />
+
+      <div className="flex mw mx-auto mt mb flex-col gap-md">
+        <input type="text" placeholder="Enter City" ref={locate} />
+        <button
+          onClick={() => {
+            setWeather(null);
+            findWeather(locate.current.value.trim());
+          }}
+        >
+          Search
+        </button>
+        {error && <p className="error-text">{error}</p>}
+      </div>
+      {weather ? (
+        <WeatherCard
+          icon={weather.current.condition.icon}
+          title={
+            weather.location.name +
+            ", " +
+            weather.location.region +
+            ", " +
+            weather.location.country
+          }
+          subtitle={weather.current.condition.text}
+          data={weather.current}
+        />
+      ) : loader ? (
+        <div className="spinner mw mx-auto"></div>
+      ) : null}
+    </section>
+  );
+};

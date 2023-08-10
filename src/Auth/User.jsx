@@ -10,8 +10,10 @@ export const User = () => {
     setUser(null);
   }
   useEffect(() => {
-    user ? console.log(`%c logged in as ${user}`, `color:var(--primary)`) : null;
-  },[user])
+    user
+      ? console.log(`%c logged in as ${user}`, `color:var(--primary)`)
+      : null;
+  }, [user]);
   return (
     <section className="mx-auto">
       <Header
@@ -19,12 +21,14 @@ export const User = () => {
         title="User Authentication"
         subtitle="User validated by localStorage"
       />
-      {user ? <h1 className="tac">{user}</h1> : <SignUp />}
-      {user && (
-        <button className="block mx-auto mt" onClick={() => deleteUser()}>
-          Delete User
-        </button>
-      )}
+      <div className="flex flex-col pad-even mx-auto gap-md">
+        {user ? <h1 className="tac">{user}</h1> : <SignUp />}
+        {user && (
+          <button className="block mx-auto mt" style={{cursor:"pointer",fontFamily:"Patua One"}} onClick={() => deleteUser()}>
+            Delete User
+          </button>
+        )}
+      </div>
     </section>
   );
 };

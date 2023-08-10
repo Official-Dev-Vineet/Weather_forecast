@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { Header } from "../Utils/Header/Header";
 import { useNavigate } from "react-router-dom";
 import { AiOutlineUserAdd } from "react-icons/ai";
@@ -41,12 +41,6 @@ export const SignUp = () => {
     localStorage.setItem("user", JSON.stringify(userObject));
     navigate(`/user`, { replace: true });
   };
-  useEffect(() => {
-    const user = localStorage?.getItem("user");
-    if (user !== null && user !== undefined && user !== "") {
-      navigate("/user");
-    }
-  });
   return (
     <section>
       <Header
