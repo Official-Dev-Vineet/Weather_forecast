@@ -10,7 +10,6 @@ export const url = {
 };
 export const currentYear = new Date().getFullYear();
 export const link = [
-  { src: "/", text: "Home" },
   { src: "/forecast", text: "Forecast" },
   { src: "/user", text: "User" },
 ];

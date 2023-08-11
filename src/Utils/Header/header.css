@@ -1,7 +1,13 @@
 header {
   height: 10rem;
   border-bottom: 2px solid var(--color-primary);
+  padding: 3rem;
 }
 header p ,footer p {
   font-family: "Patua One", cursive;
+}
+@media screen and (max-width:765px) {
+  header {
+    padding: 3rem;
+  }
 }

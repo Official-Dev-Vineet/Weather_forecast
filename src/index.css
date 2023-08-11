@@ -75,7 +75,7 @@ body.dark {
   max-width: calc(var(--max-w) * 1rem);
 }
 h1 {
-  font-size: clamp(0.5rem, 3vw, 3rem);
+  font-size: clamp(1rem, 3vw, 3rem);
   letter-spacing: 0.4rem;
   font-weight: 100;
   font-family: "campus", sans-serif;

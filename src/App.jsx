@@ -4,9 +4,7 @@ import {
   createRoutesFromElements,
   Route,
 } from "react-router-dom";
-import { Home } from "./Components/Home/Home";
 import { Forecast } from "./Components/Forecast/Forecast";
-import { About } from "./Components/About/About";
 import { RootLayout } from "./Components/RootLayout";
 import { PageNotFound } from "./Components/PageNotFound";
 import { ErrorDetails } from "./Components/ErrorDetails";
@@ -35,14 +33,20 @@ export const App = () => {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/" element={<RootLayout />} errorElement={<ErrorDetails />}>
-        <Route index element={<Home />} />
         <Route
-          path="/forecast"
+          path="/"
+          index
           element={
             user !== null && user !== undefined ? <Forecast /> : <Login />
           }
         />
-        <Route path="/about" element={<About />} />
+        <Route
+          path="/Forecast"
+          index
+          element={
+            user !== null && user !== undefined ? <Forecast /> : <Login />
+          }
+        />
         <Route path="/user" element={<User />} />
         <Route path="*" element={<PageNotFound />} />
       </Route>
