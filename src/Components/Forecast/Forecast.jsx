@@ -17,9 +17,7 @@ export const Forecast = () => {
     setWeather(null);
     setError(null);
     fetch(
-      `${import.meta.env.VITE_URL}current.json?key=${
-        import.meta.env.VITE_KEY
-      }&q=${city}`
+      `http://api.weatherapi.com/v1/current.json?key=dd3b9fcd504a49d0bd4100704230107&q=${city}`
     )
       .then((res) => {
         return res.json();
@@ -43,7 +41,7 @@ export const Forecast = () => {
       />
 
       <div className="flex mw mx-auto mt mb flex-col gap-md">
-        <input type="text" placeholder="Enter City" ref={locate} />
+        <input type="text" placeholder="Enter City" ref={locate} style={{fontFamily:"Patua One"}} />
         <button onClick={() => findWeather(locate.current.value.trim())}>
           Search
         </button>
