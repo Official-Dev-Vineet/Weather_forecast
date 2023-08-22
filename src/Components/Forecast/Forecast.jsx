@@ -17,7 +17,7 @@ export const Forecast = () => {
     setWeather(null);
     setError(null);
     fetch(
-      `https://api.weatherapi.com/v1/current.json?key=dd3b9fcd504a49d0bd4100704230107&q=${city}`
+      `https://api.weatherapi.com/v1/current.json?key=dd3b9fcd504a49d0bd4100704230107&q=${city}`,{mode:'cors'}
     )
       .then((res) => {
         return res.json();
