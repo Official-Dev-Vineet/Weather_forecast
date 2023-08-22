@@ -1,25 +1,23 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { Header } from "../../Utils/Header/Header";
 import { WeatherCard } from "../../Utils/Card/WeatherCard";
 
 export const Forecast = () => {
   const locate = useRef("");
   const [weather, setWeather] = useState(null);
-  const [city, setCity] = useState(localStorage.getItem("city") || null);
   const [loader, setLoader] = useState(false);
   const [error, setError] = useState(null);
   const findWeather = async (city) => {
-    setError(null);
     setWeather(null);
+    setError(null);
     locate.current.value.length > 0
       ? fetchWeather(city)
       : setError("Please Enter City");
-    setCity(city);
-    localStorage.setItem("city", city);
   };
-  const fetchWeather = async (city) => {
+  const fetchWeather = (city) => {
     setLoader(true);
-    await fetch(
+    setWeather(null);
+    fetch(
       `${import.meta.env.VITE_URL}current.json?key=${
         import.meta.env.VITE_KEY
       }&q=${city}`
@@ -30,13 +28,13 @@ export const Forecast = () => {
       .then((data) => {
         const { current, location } = data;
         setWeather({ current, location });
+      }).catch(() => {
+        setError("city not found");
+      })
+      .finally(() => {
+        setLoader(false);
       });
-    setLoader(false);
   };
-  useEffect(() => {
-    locate.current.value = city;
-    findWeather(city);
-  }, []);
   return (
     <section>
       <Header
@@ -56,7 +54,7 @@ export const Forecast = () => {
         </button>
         {error && <p className="error-text">{error}</p>}
       </div>
-      {weather ? (
+      {weather && error === null ? (
         <WeatherCard
           icon={weather.current.condition.icon}
           title={
