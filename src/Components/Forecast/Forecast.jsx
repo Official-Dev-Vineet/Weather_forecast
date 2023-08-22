@@ -8,8 +8,6 @@ export const Forecast = () => {
   const [loader, setLoader] = useState(false);
   const [error, setError] = useState(null);
   const findWeather = async (city) => {
-    setWeather(null);
-    setError(null);
     locate.current.value.length > 0
       ? fetchWeather(city)
       : setError("Please Enter City");
@@ -17,6 +15,7 @@ export const Forecast = () => {
   const fetchWeather = (city) => {
     setLoader(true);
     setWeather(null);
+    setError(null);
     fetch(
       `${import.meta.env.VITE_URL}current.json?key=${
         import.meta.env.VITE_KEY
@@ -28,7 +27,8 @@ export const Forecast = () => {
       .then((data) => {
         const { current, location } = data;
         setWeather({ current, location });
-      }).catch(() => {
+      })
+      .catch(() => {
         setError("city not found");
       })
       .finally(() => {
@@ -44,12 +44,7 @@ export const Forecast = () => {
 
       <div className="flex mw mx-auto mt mb flex-col gap-md">
         <input type="text" placeholder="Enter City" ref={locate} />
-        <button
-          onClick={() => {
-            setWeather(null);
-            findWeather(locate.current.value.trim());
-          }}
-        >
+        <button onClick={() => findWeather(locate.current.value.trim())}>
           Search
         </button>
         {error && <p className="error-text">{error}</p>}
