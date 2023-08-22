@@ -41,7 +41,12 @@ export const Forecast = () => {
       />
 
       <div className="flex mw mx-auto mt mb flex-col gap-md">
-        <input type="text" placeholder="Enter City" ref={locate} style={{fontFamily:"Patua One"}} />
+        <input
+          type="text"
+          placeholder="Enter City"
+          ref={locate}
+          style={{ fontFamily: "Patua One" }}
+        />
         <button onClick={() => findWeather(locate.current.value.trim())}>
           Search
         </button>
